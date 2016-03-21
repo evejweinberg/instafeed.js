@@ -173,6 +173,7 @@ class Instafeed
         # loop through the images
         for image in images
           imageObj = image.images[@options.resolution]
+          videoObj = image.videos[@options.resolution]
           if typeof imageObj isnt 'object'
             eMsg = "No image found for resolution: #{@options.resolution}."
             throw new Error eMsg
@@ -188,6 +189,7 @@ class Instafeed
 
           # use protocol relative image url
           imageUrl = imageObj.url
+          videoUrl = videoObj.url
           httpProtocol = window.location.protocol.indexOf("http") >= 0
           if httpProtocol and !@options.useHttp
             imageUrl = imageUrl.replace(/https?:\/\//, '//')
@@ -199,6 +201,7 @@ class Instafeed
             link: image.link
             type: image.type
             image: imageUrl
+            video: videoUrl
             width: imgWidth
             height: imgHeight
             orientation: imgOrient
